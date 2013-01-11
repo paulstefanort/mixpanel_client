@@ -19,7 +19,7 @@ module Mixpanel
     end
 
     def self.get(uri)
-      ::URI.parse(uri).read
+      ::URI.parse(uri).read(:read_timeout => 120)
     rescue OpenURI::HTTPError => error
       raise HTTPError, JSON.parse(error.io.read)['error']
     end
